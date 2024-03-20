@@ -14,6 +14,7 @@ type Context struct {
 
 	Path   string
 	Method string
+	Params map[string]string // get param
 	// response status
 	StatusCode int
 }
@@ -38,6 +39,11 @@ func (c *Context) PostForm(key string) string {
 
 func (c *Context) Query(key string) string {
 	return c.Req.URL.Query().Get(key)
+}
+
+func (c *Context) Param(key string) string {
+	value, _ := c.Params[key]
+	return value
 }
 
 // func (c *Context) String(code int, format string, values ...any)
